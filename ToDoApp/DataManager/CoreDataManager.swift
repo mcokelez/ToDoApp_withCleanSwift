@@ -8,12 +8,6 @@
 import UIKit
 import CoreData
 
-protocol DataManagerProtocol {
-    func insert<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date) -> Entity?
-    func update<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date)
-    func delete<Entity>(entity: Entity.Type)
-    func fetchAll<Entity>(entity: Entity.Type) -> [Entity]?
-}
 
 class CoreDataManager : DataManagerProtocol {
     
@@ -72,7 +66,7 @@ class CoreDataManager : DataManagerProtocol {
         }
     }
     
-    func fetchAll<Entity>(entity: Entity.Type) -> [Entity]? {
+    func fetchItems<Entity>(entity: Entity.Type) -> [Entity]? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "\(entity)")
         do {
             let toDoEntities = try CoreDataManaged.context.fetch(fetchRequest) as! [Entity]
