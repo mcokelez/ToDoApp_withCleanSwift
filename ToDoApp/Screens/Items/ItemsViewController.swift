@@ -28,7 +28,13 @@ class ItemsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.fetchToDoItems()
+        tableView.register(UINib(nibName: "ItemsCell", bundle: nil), forCellReuseIdentifier: "itemsCell")
     }
+    
+    @IBAction func addBarButtonTapped(_ sender: UIBarButtonItem) {
+        router?.navigate(to: .addNewToDoItem)
+    }
+    
   
 }
 
@@ -36,26 +42,27 @@ extension ItemsViewController: ItemsViewProtocol {
     
     func presentToDoItems(viewModel: ViewPresentation) {
         self.viewModel = viewModel
-        tableView.reloadData()
+        self.tableView.reloadData()
         print(viewModel.items)
     }
 }
 
 extension ItemsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        router?.navigate(to: .presentToDoItemsDetail(indexPath.row))
     }
 }
 
 extension ItemsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel?.items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = self.viewModel?.items[indexPath.row].title
-        return cell!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "itemsCell", for: indexPath) as? ItemsCell else { return UITableViewCell() }
+        cell.titleLabel.text = viewModel?.items[indexPath.row].title
+        cell.createdDateLabel.text = viewModel?.items[indexPath.row].createdTime.dateAsPrettyString
+        return cell
     }
     
     

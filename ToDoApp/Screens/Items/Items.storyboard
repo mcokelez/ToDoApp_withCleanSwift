@@ -11,12 +11,12 @@
         <!--To Do List-->
         <scene sceneID="Kxn-Bl-2j7">
             <objects>
-                <viewController id="hMT-f6-5ma" customClass="ItemsViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hMT-f6-5ma" customClass="ItemsViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ima-Cw-glz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C7k-1O-3hj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="69" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C7k-1O-3hj">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
@@ -35,7 +35,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="To Do List" id="Rnk-Tb-ulL">
-                        <barButtonItem key="rightBarButtonItem" image="plus.rectangle.on.rectangle" catalog="system" id="cN8-dK-Jxc"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus.rectangle.on.rectangle" catalog="system" id="cN8-dK-Jxc">
+                            <connections>
+                                <action selector="addBarButtonTapped:" destination="hMT-f6-5ma" id="iqu-kv-KBm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="C7k-1O-3hj" id="1KB-uE-EOx"/>
@@ -48,6 +52,7 @@
         <!--Navigation Controller-->
         <scene sceneID="GQR-5d-JFi">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3b3-2T-dKw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EXd-pt-Jh3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z4c-JW-sbK">
@@ -59,7 +64,6 @@
                         <segue destination="hMT-f6-5ma" kind="relationship" relationship="rootViewController" id="Tbw-UI-nVM"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3b3-2T-dKw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-368.11594202898556" y="-53.571428571428569"/>
         </scene>

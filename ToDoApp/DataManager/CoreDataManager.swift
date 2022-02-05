@@ -19,6 +19,7 @@ class CoreDataManager : DataManagerProtocol {
         toDoEntity.detail = detail
         toDoEntity.deadline = deadline
         toDoEntity.createdTime = Date()
+        toDoEntity.id = UUID()
         
         do {
             try CoreDataManaged.context.save()
@@ -30,15 +31,17 @@ class CoreDataManager : DataManagerProtocol {
         }
     }
     
-    func update<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date) {
+    func update<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date, id: UUID) {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "\(entity)")
         do {
             let results = try CoreDataManaged.context.fetch(fetchRequest)
             for result in results {
-                result.setValue(title, forKey: "title")
-                result.setValue(detail, forKey: "detail")
-                result.setValue(deadline, forKey: "deadline")
-                result.setValue(Date(), forKey: "createdTime")
+                if result.value(forKey: "id") as! UUID == id {
+                    result.setValue(title, forKey: "title")
+                    result.setValue(detail, forKey: "detail")
+                    result.setValue(deadline, forKey: "deadline")
+                    result.setValue(Date(), forKey: "createdTime")
+                }
             }
             try CoreDataManaged.context.save()
         } catch {
@@ -47,12 +50,14 @@ class CoreDataManager : DataManagerProtocol {
         }
     }
     
-    func delete<Entity>(entity: Entity.Type){
+    func delete<Entity>(entity: Entity.Type, id: UUID){
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "\(entity)")
         do {
             let results = try CoreDataManaged.context.fetch(fetchRequest)
             for result in results {
-                CoreDataManaged.context.delete(result)
+                if result.value(forKey: "id") as! UUID == id {
+                    CoreDataManaged.context.delete(result)
+                }
             }
             do {
                 try CoreDataManaged.context.save()
@@ -79,7 +84,7 @@ class CoreDataManager : DataManagerProtocol {
     }
     
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ToDoApp")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -89,9 +94,9 @@ class CoreDataManager : DataManagerProtocol {
         })
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -103,5 +108,5 @@ class CoreDataManager : DataManagerProtocol {
             }
         }
     }
-
+    
 }

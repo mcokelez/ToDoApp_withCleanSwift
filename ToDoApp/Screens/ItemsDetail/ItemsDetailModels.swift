@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct DetailResponse {
+    let response: ToDo
+}
+
+struct DetailViewPresentation {
+    let title: String
+    let createdTime: Date
+}
+
