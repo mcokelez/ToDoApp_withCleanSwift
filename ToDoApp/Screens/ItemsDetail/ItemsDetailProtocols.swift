@@ -16,12 +16,13 @@ protocol ItemsDetailInteractorProtocol {
     func presentToDoItemsDetail()
     func addToDoItem(title: String, detail: String, deadline: Date)
     func editToDoItem(title: String, detail: String, deadline: Date, id: UUID)
+    func getToDoItem(id: UUID) -> ToDo?
     func deleteToDoItem()
     
 }
 
 protocol ItemsDetailDataStoreProtocol {
-    var itemsDetail: ToDo? { get set}
+    var itemID: UUID? { get set}
 }
 
 protocol ItemsDetailPresenterProtocol {
@@ -29,7 +30,7 @@ protocol ItemsDetailPresenterProtocol {
 }
 
 enum ItemsDetailRoute {
-    case presentToDoItems
+    case presentItemsViewController
 }
 
 typealias ItemsDetailRouterProtocol = ItemsDetailRoutingProtocol & ItemsDetailDataPassingProtocol

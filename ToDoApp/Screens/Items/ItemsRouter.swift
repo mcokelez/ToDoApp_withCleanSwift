@@ -14,14 +14,18 @@ class ItemsRouter : ItemsRouterProtocol {
     var dataStore: ItemsDataStoreProtocol?
     
     func navigate(to route: ItemsRoute) {
-        let storyboard = UIStoryboard(name: "ItemsDetail", bundle: nil)
+        let storyboard = UIStoryboard(name: "Items", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(withIdentifier: "ItemsDetailViewController") as! ItemsDetailViewController
         
         switch route{
-        case .presentToDoItemsDetail(let index):
-            destinationVC.router?.dataStore?.itemsDetail = dataStore?.response[index]
+        case .presentItemsDetailController(let id, let index):
+            dataStore?.itemsArray[index].id = id
+            destinationVC.router?.dataStore?.itemID = dataStore?.itemsArray[index].id
         case .addNewToDoItem: break
         }
         self.viewController?.navigationController?.present(destinationVC, animated: true, completion: nil)
     }
+    
+   
 }
+

@@ -13,7 +13,8 @@ class ItemsPresenter : ItemsPresenterProtocol {
     func presentToDoItems(output: Response) {
         for item in output.response {
             viewModel.append(ViewPresentation.ViewModel(title: item.title!,
-                                                        createdTime: item.createdTime!))
+                                                        createdTime: item.createdTime!,
+                                                        id: item.id!))
         }
         viewController?.presentToDoItems(viewModel: ViewPresentation(items: viewModel))
     }

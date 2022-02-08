@@ -13,7 +13,7 @@ class CoreDataManager : DataManagerProtocol {
     
     static let shared = CoreDataManager()
     
-    func insert<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date) -> Entity? {
+    func insert<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date) {
         let toDoEntity = ToDo(context: CoreDataManaged.context)
         toDoEntity.title = title
         toDoEntity.detail = detail
@@ -23,11 +23,9 @@ class CoreDataManager : DataManagerProtocol {
         
         do {
             try CoreDataManaged.context.save()
-            return toDoEntity as? Entity
         } catch {
             let error = CoreDataError.insertError
             print("\(error)")
-            return nil
         }
     }
     
@@ -71,7 +69,7 @@ class CoreDataManager : DataManagerProtocol {
         }
     }
     
-    func fetchItems<Entity>(entity: Entity.Type) -> [Entity]? {
+    func fetchAllItems<Entity>(entity: Entity.Type) -> [Entity]? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "\(entity)")
         do {
             let toDoEntities = try CoreDataManaged.context.fetch(fetchRequest) as! [Entity]
@@ -83,6 +81,23 @@ class CoreDataManager : DataManagerProtocol {
         }
     }
     
+    func fetchSelectedItem<Entity>(entity: Entity.Type, id: UUID) -> Entity? {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "\(entity)")
+        var item: Entity?
+        do {
+            let results = try CoreDataManaged.context.fetch(fetchRequest)
+            for result in results {
+                if result.value(forKey: "id") as! UUID == id {
+                    item = result as? Entity
+                }
+            }
+        } catch {
+            let error = CoreDataError.fetchError
+            print("\(error)")
+            return nil
+        }
+        return item
+    }
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {

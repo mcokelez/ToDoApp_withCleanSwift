@@ -11,5 +11,5 @@ enum CoreDataError : String {
     case fetchError = "Could not fetch."
     case insertError = "Could not insert."
     case updateError = "Could not update."
-    case deleteError = "Could not delete"
+    case deleteError = "Could not delete."
 }

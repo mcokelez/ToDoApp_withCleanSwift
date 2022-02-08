@@ -10,7 +10,7 @@ import Foundation
 class ItemsInteractor : ItemsInteractorProtocol, ItemsDataStoreProtocol{
     
     var presenter: ItemsPresenterProtocol?
-    var response : [ToDo] = []
+    var itemsArray : [ToDo] = []
     
     let dataWorker: CoreDataManager
     init(dataWorker: CoreDataManager) {
@@ -18,9 +18,9 @@ class ItemsInteractor : ItemsInteractorProtocol, ItemsDataStoreProtocol{
     }
     
     func fetchToDoItems() {
-        guard let response = dataWorker.fetchItems(entity: ToDo.self) else { return }
-        self.response = response
-        self.presenter?.presentToDoItems(output: Response.init(response: self.response))
+        guard let response = dataWorker.fetchAllItems(entity: ToDo.self) else { return }
+        self.itemsArray = response
+        self.presenter?.presentToDoItems(output: Response.init(response: self.itemsArray))
     }
     
     

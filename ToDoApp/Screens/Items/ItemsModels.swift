@@ -17,6 +17,7 @@ struct ViewPresentation {
     struct ViewModel {
         let title: String
         let createdTime: Date
+        let id: UUID
     }
 }
 

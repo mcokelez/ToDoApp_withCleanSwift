@@ -11,7 +11,7 @@ class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStore
    
     var newToDoItem: ToDo?
     var presenter : ItemsDetailPresenterProtocol?
-    var itemsDetail: ToDo?
+    var itemID: UUID?
     
     let dataWorker: CoreDataManager
     init(dataWorker: CoreDataManager) {
@@ -19,8 +19,9 @@ class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStore
     }
     
     func presentToDoItemsDetail() {
-        guard let itemsDetail = itemsDetail else { return }
-        presenter?.presentToDoItemsDetail(output: DetailResponse.init(response: itemsDetail))
+        guard let itemID = itemID else { return }
+        guard let item = getToDoItem(id: itemID) else { return }
+        presenter?.presentToDoItemsDetail(output: DetailResponse.init(response: item))
     }
     
     func addToDoItem(title: String, detail: String, deadline: Date) {
@@ -31,12 +32,15 @@ class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStore
     }
     
     func editToDoItem(title: String, detail: String, deadline: Date, id: UUID){
-        guard let itemsDetail = itemsDetail else { return }
-        dataWorker.update(entity: ToDo.self, title: title, detail: detail, deadline: deadline, id: itemsDetail.id!)
+        dataWorker.update(entity: ToDo.self, title: title, detail: detail, deadline: deadline, id: id)
     }
     
     func deleteToDoItem() {
-        guard let itemsDetail = itemsDetail else { return }
-        dataWorker.delete(entity: ToDo.self, id: itemsDetail.id!)
+        guard let itemID = itemID else { return }
+        dataWorker.delete(entity: ToDo.self, id: itemID)
+    }
+    
+    func getToDoItem(id: UUID) -> ToDo? {
+        dataWorker.fetchSelectedItem(entity: ToDo.self, id: id)
     }
 }

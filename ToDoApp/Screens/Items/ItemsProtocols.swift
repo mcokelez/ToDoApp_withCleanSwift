@@ -18,7 +18,7 @@ protocol ItemsInteractorProtocol {
 }
 
 protocol ItemsDataStoreProtocol {
-    var response: [ToDo] { get set}
+    var itemsArray: [ToDo] { get set}
 }
 
 protocol ItemsPresenterProtocol {
@@ -26,7 +26,7 @@ protocol ItemsPresenterProtocol {
 }
 
 enum ItemsRoute {
-    case presentToDoItemsDetail(_ index: Int)
+    case presentItemsDetailController(_ id: UUID, _ index: Int)
     case addNewToDoItem
 }
 

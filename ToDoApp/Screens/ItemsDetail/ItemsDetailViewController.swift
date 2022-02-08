@@ -32,17 +32,18 @@ class ItemsDetailViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        guard let item = router?.dataStore?.itemsDetail else {
+        guard let itemID = router?.dataStore?.itemID else {
             interactor?.addToDoItem(title: titleText.text!, detail: detailText.text, deadline: Date())
+            router?.navigate(to: .presentItemsViewController)
             return
         }
-        interactor?.editToDoItem(title: titleText.text!, detail: detailText.text, deadline: item.deadline!, id: item.id!)
-        router?.navigate(to: .presentToDoItems)
+        interactor?.editToDoItem(title: titleText.text!, detail: detailText.text, deadline: Date(), id: itemID)
+        router?.navigate(to: .presentItemsViewController)
     }
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         interactor?.deleteToDoItem()
-        router?.navigate(to: .presentToDoItems)
+        router?.navigate(to: .presentItemsViewController)
     }
     
     private func setup(){
