@@ -23,13 +23,8 @@ class ItemsInteractor : ItemsInteractorProtocol, ItemsDataStoreProtocol{
         self.presenter?.presentToDoItems(output: Response.init(response: self.itemsArray))
     }
     
-    
-    func filterItems(with createdTime: Int) {
-     
+    func deleteToDoItem(id: UUID) {
+        dataWorker.delete(entity: ToDo.self, id: id)
+        fetchToDoItems()
     }
-    
-    func searchItems(with character: String) {
-       
-    }
-    
 }

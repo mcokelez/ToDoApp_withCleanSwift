@@ -16,13 +16,7 @@ class ItemsDetailRouter: ItemsDetailRouterProtocol {
     func navigate(to route: ItemsDetailRoute) {
         switch route {
         case .presentItemsViewController:
-            
-//            let storyboard = UIStoryboard(name: "Items", bundle: nil)
-//            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ItemsViewController") as! ItemsViewController
-            viewController?.dismiss(animated: true, completion: nil)
-////            destinationVC.tableView = UITableView()
-//            destinationVC.interactor?.fetchToDoItems()
-            _ = self.viewController?.navigationController?.popViewController(animated: true)
+            self.viewController?.navigationController?.popViewController(animated: true)
         }
     }
 }

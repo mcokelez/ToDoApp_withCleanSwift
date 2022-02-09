@@ -14,7 +14,7 @@ class ItemsRouter : ItemsRouterProtocol {
     var dataStore: ItemsDataStoreProtocol?
     
     func navigate(to route: ItemsRoute) {
-        let storyboard = UIStoryboard(name: "Items", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(withIdentifier: "ItemsDetailViewController") as! ItemsDetailViewController
         
         switch route{

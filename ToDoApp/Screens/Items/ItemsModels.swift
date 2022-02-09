@@ -12,7 +12,7 @@ struct Response {
 }
 
 struct ViewPresentation {
-    let items: [ViewPresentation.ViewModel]
+    var items: [ViewPresentation.ViewModel]
     
     struct ViewModel {
         let title: String

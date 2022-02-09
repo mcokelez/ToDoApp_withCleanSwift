@@ -11,6 +11,7 @@ class ItemsPresenter : ItemsPresenterProtocol {
     weak var viewController: ItemsViewProtocol?
     var viewModel : [ViewPresentation.ViewModel] = []
     func presentToDoItems(output: Response) {
+        viewModel.removeAll()
         for item in output.response {
             viewModel.append(ViewPresentation.ViewModel(title: item.title!,
                                                         createdTime: item.createdTime!,
