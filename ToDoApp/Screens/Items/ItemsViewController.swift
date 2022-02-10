@@ -75,15 +75,21 @@ class ItemsViewController: UIViewController {
     }
     
     func filterSearchText(searchText: String, scopeButton: String){
-        
         filteredViewModel = viewModel?.items.filter({ (filteredItem: ViewPresentation.ViewModel) -> Bool in
-         
-            let doesSearchMatch = (scopeButton == "All") || (filteredItem.createdTime.dateAsPrettyString == scopeButton)
-
             if isSearchBarEmpty {
-                return doesSearchMatch
+                if scopeButton == "Last Item" {
+                    let filteredArray = viewModel?.items.sorted(by: { $0.createdTime > $1.createdTime })
+                    print(filteredArray!)
+                    return true && (filteredArray != nil)
+                } else {
+                    return false
+                }
             } else {
-                return doesSearchMatch && filteredItem.title.lowercased().contains(searchText.lowercased())
+                if scopeButton == "All" {
+                    return true && filteredItem.title.lowercased().contains(searchText.lowercased())
+                } else {
+                    return false
+                }
             }
         })
         self.tableView.reloadData()
@@ -94,17 +100,15 @@ extension ItemsViewController: ItemsViewProtocol {
     func presentToDoItems(viewModel: ViewPresentation) {
         self.viewModel = viewModel
         self.tableView.reloadData()
-        print(viewModel.items)
+       // print(viewModel.items)
     }
 }
 
 extension ItemsViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             var id: UUID?
-            
-            if(self.searchController.isActive) {
+            if (self.searchController.isActive){
                 id = filteredViewModel![indexPath.row].id
             }
             else {
@@ -154,7 +158,6 @@ extension ItemsViewController: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "itemsCell", for: indexPath) as? ItemsCell else { return UITableViewCell() }
         let currentItem: ViewPresentation.ViewModel
-        
         if isFiltering {
             currentItem = filteredViewModel![indexPath.row]
         }
@@ -168,11 +171,9 @@ extension ItemsViewController: UITableViewDataSource {
 }
 
 extension ItemsViewController: UISearchResultsUpdating {
-    
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar  = searchController.searchBar
         let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        
         filterSearchText(searchText: searchBar.text!, scopeButton: scopeButton)
     }
 }
