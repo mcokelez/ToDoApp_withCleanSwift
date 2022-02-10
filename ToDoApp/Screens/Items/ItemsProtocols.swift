@@ -13,8 +13,7 @@ protocol ItemsViewProtocol : NSObject {
 
 protocol ItemsInteractorProtocol {
     func fetchToDoItems()
-    func filterItems(with createdTime: Int)
-    func searchItems(with character: String)
+    func deleteToDoItem(id: UUID)
 }
 
 protocol ItemsDataStoreProtocol {

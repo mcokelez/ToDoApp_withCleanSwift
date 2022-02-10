@@ -19,6 +19,10 @@ class ItemsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ItemsCell", bundle: nil), forCellReuseIdentifier: "itemsCell")
+        let image = UIImage(named: "5685019.png")
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .bottom
+        tableView.backgroundView = imageView
         return tableView
     }()
     
@@ -46,6 +50,9 @@ class ItemsViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.searchController = searchController
         tableViewSetup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         interactor?.fetchToDoItems()
     }
     
@@ -92,24 +99,51 @@ extension ItemsViewController: ItemsViewProtocol {
 }
 
 extension ItemsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        var id: UUID?
-        
-        if(self.searchController.isActive) {
-            id = filteredViewModel![indexPath.row].id
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            var id: UUID?
+            
+            if(self.searchController.isActive) {
+                id = filteredViewModel![indexPath.row].id
+            }
+            else {
+                id = self.viewModel?.items[indexPath.row].id
+            }
+            interactor?.deleteToDoItem(id: id!)
         }
-        else {
-            id = self.viewModel?.items[indexPath.row].id
-        }
-        router?.navigate(to: .presentItemsDetailController(id!,indexPath.row))
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       self.performSegue(withIdentifier: "selectedRow", sender: self)
+       //  router?.navigate(to: .presentItemsDetailController(id!,indexPath.row))
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "selectedRow" {
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let detail = segue.destination as! ItemsDetailViewController
+            var id: UUID?
+            if(self.searchController.isActive) {
+                id = filteredViewModel![indexPath!.row].id
+            }
+            else {
+                id = self.viewModel?.items[indexPath!.row].id
+            }
+            detail.router?.dataStore?.itemID = id
+            self.tableView.deselectRow(at: indexPath!, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
 }
 
 extension ItemsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering { return (filteredViewModel?.count)!}
@@ -117,8 +151,8 @@ extension ItemsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "itemsCell", for: indexPath) as? ItemsCell else { return UITableViewCell() }
         
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "itemsCell", for: indexPath) as? ItemsCell else { return UITableViewCell() }
         let currentItem: ViewPresentation.ViewModel
         
         if isFiltering {

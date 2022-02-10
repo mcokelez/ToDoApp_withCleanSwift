@@ -10,7 +10,7 @@ import UIKit
 
 class ItemsDetailBuilder {
     static func build(_ viewController: ItemsDetailViewController){
-        let viewController = ItemsDetailViewController()
+        let viewController = viewController
         let interactor = ItemsDetailInteractor(dataWorker: CoreDataManager())
         let presenter = ItemsDetailPresenter()
         let router = ItemsDetailRouter()

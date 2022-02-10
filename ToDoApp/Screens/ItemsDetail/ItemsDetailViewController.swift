@@ -11,60 +11,94 @@ class ItemsDetailViewController: UIViewController {
     
     var interactor: ItemsDetailInteractorProtocol?
     var router: ItemsDetailRouterProtocol?
-
     
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var detailText: UITextView!
+    @IBOutlet weak var deadlinePicker: UIDatePicker!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-       setup()
+        ItemsDetailBuilder.build(self)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
+        ItemsDetailBuilder.build(self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailText.text = "Details..."
+        detailText.textColor = UIColor.lightGray
+        deadlineDefaultValue()
         interactor?.presentToDoItemsDetail()
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
+    func deadlineDefaultValue() {
+        deadlinePicker.isHidden = true
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat =  "dd.MM.yyyy"
+        let date = dateFormatter.date(from: "19.05.1992")
+        deadlinePicker.date = date!
+    }
+    
+    @IBAction func didDeadlineButtonTap(_ sender: UIButton) {
+        deadlinePicker.isHidden = false
+        deadlinePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+    }
+    
+    @objc private func dateChanged() {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+        print(deadlinePicker.date.dateAsPrettyString)
+    }
+    
+    @IBAction func saveBarButton(_ sender: UIBarButtonItem) {
         guard let itemID = router?.dataStore?.itemID else {
-            interactor?.addToDoItem(title: titleText.text!, detail: detailText.text, deadline: Date())
+            guard let text = titleText.text, !text.isEmpty else {
+                didTitleEmpty()
+                return
+            }
+            interactor?.addToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date)
             router?.navigate(to: .presentItemsViewController)
             return
         }
-        interactor?.editToDoItem(title: titleText.text!, detail: detailText.text, deadline: Date(), id: itemID)
+        interactor?.editToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date, id: itemID)
         router?.navigate(to: .presentItemsViewController)
     }
     
-    @IBAction func deleteButtonTapped(_ sender: UIButton) {
-        interactor?.deleteToDoItem()
-        router?.navigate(to: .presentItemsViewController)
+    func didTitleEmpty() {
+        let alert = UIAlertController(title: "Required", message: "Title can not be empty!", preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    private func setup(){
-        let viewController = self
-        let interactor = ItemsDetailInteractor(dataWorker: CoreDataManager())
-        let presenter = ItemsDetailPresenter()
-        let router = ItemsDetailRouter()
-        
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-    
 }
 
 extension ItemsDetailViewController: ItemsDetailViewProtocol {
     func presentToDoItemsDetail(viewModel: DetailViewPresentation) {
         self.titleText.text = viewModel.title
-//        self.detailText.text = viewModel.
+        self.detailText.text = viewModel.detail
+        if viewModel.deadline.dateAsPrettyString != "19.05.1992" {
+            self.deadlinePicker.isHidden = false
+            self.deadlinePicker.date = viewModel.deadline
+            self.deadlinePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        } else {
+            self.deadlinePicker.isHidden = true
+        }
+    }
+}
+
+extension ItemsDetailViewController : UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Details..."
+            textView.textColor = UIColor.lightGray
+        }
     }
 }

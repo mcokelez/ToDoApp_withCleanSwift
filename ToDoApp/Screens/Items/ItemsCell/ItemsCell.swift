@@ -16,12 +16,5 @@ class ItemsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    @IBAction func checkButtonTapped(_ sender: CheckBox) {
-//        let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: titleLabel.text!)
-//            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSRange(location: 0, length: attributeString.length))
-//        titleLabel.attributedText = attributeString
-    }
-    
 }
 

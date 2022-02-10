@@ -14,5 +14,7 @@ struct DetailResponse {
 struct DetailViewPresentation {
     let title: String
     let createdTime: Date
+    let detail: String
+    let deadline: Date
 }
 
