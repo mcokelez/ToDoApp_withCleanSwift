@@ -30,6 +30,8 @@
 		5C63588A27A958D400F4057D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C63588927A958D400F4057D /* Main.storyboard */; };
 		5C63589327A972FB00F4057D /* ItemsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63589227A972FB00F4057D /* ItemsBuilder.swift */; };
 		5C63589727A979E600F4057D /* ItemsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63589627A979E600F4057D /* ItemsProtocols.swift */; };
+		5C63817527B5705500E01264 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63817427B5705500E01264 /* NotificationManager.swift */; };
+		5C63817827B5706E00E01264 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63817727B5706E00E01264 /* LocalNotificationManager.swift */; };
 		5CB86D9D27A6FE2F00106F8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB86D9C27A6FE2F00106F8D /* AppDelegate.swift */; };
 		5CB86D9F27A6FE2F00106F8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB86D9E27A6FE2F00106F8D /* SceneDelegate.swift */; };
 		5CB86DA727A6FE2F00106F8D /* ToDoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CB86DA527A6FE2F00106F8D /* ToDoApp.xcdatamodeld */; };
@@ -61,6 +63,8 @@
 		5C63588927A958D400F4057D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5C63589227A972FB00F4057D /* ItemsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsBuilder.swift; sourceTree = "<group>"; };
 		5C63589627A979E600F4057D /* ItemsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsProtocols.swift; sourceTree = "<group>"; };
+		5C63817427B5705500E01264 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		5C63817727B5706E00E01264 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		5CB86D9927A6FE2F00106F8D /* ToDoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB86D9C27A6FE2F00106F8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CB86D9E27A6FE2F00106F8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +187,15 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		5C63817327B56F8E00E01264 /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				5C63817427B5705500E01264 /* NotificationManager.swift */,
+				5C63817727B5706E00E01264 /* LocalNotificationManager.swift */,
+			);
+			path = NotificationManager;
+			sourceTree = "<group>";
+		};
 		5CB86D9027A6FE2F00106F8D = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +215,7 @@
 		5CB86D9B27A6FE2F00106F8D /* ToDoApp */ = {
 			isa = PBXGroup;
 			children = (
+				5C63817327B56F8E00E01264 /* NotificationManager */,
 				5C60D04827A847BB00F18381 /* Screens */,
 				5C60D03627A8082700F18381 /* DataManager */,
 				5CB86DB527A6FFD600106F8D /* Resources */,
@@ -308,12 +322,14 @@
 				5C63587B27A954D400F4057D /* ItemsDetailModels.swift in Sources */,
 				5C60D03827A8084000F18381 /* CoreDataManager.swift in Sources */,
 				5CB86DA727A6FE2F00106F8D /* ToDoApp.xcdatamodeld in Sources */,
+				5C63817827B5706E00E01264 /* LocalNotificationManager.swift in Sources */,
 				5C63588527A9564700F4057D /* DataManager.swift in Sources */,
 				5C63587E27A954EF00F4057D /* ItemsDetailRouter.swift in Sources */,
 				5C62265E27AD6AF4008835D5 /* ItemsDetailProtocols.swift in Sources */,
 				5C63586F27A9548200F4057D /* ItemsRouter.swift in Sources */,
 				5C63589327A972FB00F4057D /* ItemsBuilder.swift in Sources */,
 				5C62265127AD5D9F008835D5 /* CheckBox.swift in Sources */,
+				5C63817527B5705500E01264 /* NotificationManager.swift in Sources */,
 				5C63587827A954C400F4057D /* ItemsDetailPresenter.swift in Sources */,
 				5C62264927AD5819008835D5 /* ItemsCell.swift in Sources */,
 			);

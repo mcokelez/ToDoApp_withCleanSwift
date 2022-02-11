@@ -12,8 +12,8 @@ import CoreData
 class CoreDataManager : DataManagerProtocol {
     
     static let shared = CoreDataManager()
-    
-    func insert<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date) {
+  
+    func insert<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date) -> Entity? {
         let toDoEntity = ToDo(context: CoreDataManaged.context)
         toDoEntity.title = title
         toDoEntity.detail = detail
@@ -23,16 +23,20 @@ class CoreDataManager : DataManagerProtocol {
         
         do {
             try CoreDataManaged.context.save()
+            //LocalNotificationManager.shared.scheduleNotification(item: toDoEntity)
+            return toDoEntity as? Entity
         } catch {
             let error = CoreDataError.insertError
             print("\(error)")
+            return nil
         }
     }
     
-    func update<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date, id: UUID) {
+    func update<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date, id: UUID) -> Entity? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "\(entity)")
         do {
             let results = try CoreDataManaged.context.fetch(fetchRequest)
+            var response: Entity?
             for result in results {
                 if result.value(forKey: "id") as! UUID == id {
                     result.setValue(title, forKey: "title")
@@ -40,11 +44,14 @@ class CoreDataManager : DataManagerProtocol {
                     result.setValue(deadline, forKey: "deadline")
                     result.setValue(Date(), forKey: "createdTime")
                 }
+                response = (result as? Entity)!
             }
             try CoreDataManaged.context.save()
+            return response
         } catch {
             let error = CoreDataError.insertError
             print("\(error)","during the deletion process.")
+            return nil
         }
     }
     
@@ -55,6 +62,7 @@ class CoreDataManager : DataManagerProtocol {
             for result in results {
                 if result.value(forKey: "id") as! UUID == id {
                     CoreDataManaged.context.delete(result)
+                    LocalNotificationManager.shared.scheduleNotification(item: result as! ToDo)
                 }
             }
             do {

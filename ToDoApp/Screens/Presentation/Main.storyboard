@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8jp-1Z-jHM">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController storyboardIdentifier="ItemsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qju-al-5Sv" customClass="ItemsViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HBT-X1-yOF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5685019.png" translatesAutoresizingMaskIntoConstraints="NO" id="wme-iX-85k">
-                                <rect key="frame" x="0.0" y="96" width="414" height="640"/>
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PNo-Wi-NbE"/>
@@ -30,7 +30,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="To Do List" id="JwP-W1-LXF">
-                        <barButtonItem key="rightBarButtonItem" image="plus.rectangle.on.rectangle" catalog="system" id="JLt-SL-2bp">
+                        <barButtonItem key="leftBarButtonItem" image="calendar.badge.clock.rtl" catalog="system" id="SKn-n4-JwX">
+                            <connections>
+                                <action selector="filterBarButtonTapped:" destination="qju-al-5Sv" id="ut0-Gu-g3P"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus.rectangle.on.rectangle" catalog="system" id="JLt-SL-2bp">
                             <connections>
                                 <action selector="addBarButtonTapped:" destination="qju-al-5Sv" id="88Z-xw-iWv"/>
                                 <segue destination="e8I-Y1-gCp" kind="show" id="Bfc-G2-5L0"/>
@@ -52,7 +57,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="zSa-28-oaz"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="wJG-1a-D65">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -69,14 +74,14 @@
             <objects>
                 <viewController storyboardIdentifier="ItemsDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="e8I-Y1-gCp" customClass="ItemsDetailViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UTE-pN-Ds8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5685019.png" translatesAutoresizingMaskIntoConstraints="NO" id="xGX-Dh-isD">
-                                <rect key="frame" x="0.0" y="96" width="414" height="640"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="xGX-Dh-isD">
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="mZh-02-Gi8">
-                                <rect key="frame" x="35.666666666666657" y="166" width="343" height="40"/>
+                                <rect key="frame" x="16" y="166" width="343" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7w-gW-kxG">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="40"/>
@@ -101,7 +106,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-NP-73r">
-                                <rect key="frame" x="38" y="226" width="338" height="150"/>
+                                <rect key="frame" x="18.5" y="226" width="338" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmb-ga-hY4">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="40"/>
@@ -132,15 +137,15 @@
                                     <constraint firstAttribute="height" constant="150" id="ing-hG-J2G"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dZ3-ms-mMG">
-                                <rect key="frame" x="47" y="396" width="320" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="dZ3-ms-mMG">
+                                <rect key="frame" x="17.5" y="396" width="340" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5U3-KE-RKy">
-                                        <rect key="frame" x="0.0" y="0.0" width="170" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="170" id="sOd-ux-L6d"/>
+                                            <constraint firstAttribute="width" constant="140" id="sOd-ux-L6d"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="19"/>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="18"/>
                                         <state key="normal" title="Set Deadline Time ">
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
@@ -148,12 +153,12 @@
                                             <action selector="didDeadlineButtonTap:" destination="e8I-Y1-gCp" eventType="touchUpInside" id="zKT-nC-b4l"/>
                                         </connections>
                                     </button>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="gHb-wU-bYM">
-                                        <rect key="frame" x="190" y="0.0" width="130" height="60"/>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="gHb-wU-bYM">
+                                        <rect key="frame" x="157" y="0.0" width="183" height="60"/>
                                     </datePicker>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="b0K-hf-ghx"/>
+                                    <constraint firstAttribute="width" constant="340" id="b0K-hf-ghx"/>
                                     <constraint firstAttribute="height" constant="60" id="miO-N1-ECi"/>
                                 </constraints>
                             </stackView>
@@ -196,6 +201,8 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="5685019.png" width="3000" height="2000"/>
+        <image name="background" width="3000" height="2000"/>
+        <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
         <image name="plus.rectangle.on.rectangle" catalog="system" width="128" height="96"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

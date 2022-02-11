@@ -15,7 +15,8 @@ class ItemsPresenter : ItemsPresenterProtocol {
         for item in output.response {
             viewModel.append(ViewPresentation.ViewModel(title: item.title!,
                                                         createdTime: item.createdTime!,
-                                                        id: item.id!))
+                                                        id: item.id!,
+                                                        deadline: (item.deadline?.dateAsPrettyString)!))
         }
         viewController?.presentToDoItems(viewModel: ViewPresentation(items: viewModel))
     }

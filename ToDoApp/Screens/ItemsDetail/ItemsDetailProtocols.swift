@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import  UIKit
 
 protocol ItemsDetailViewProtocol : NSObject {
     func presentToDoItemsDetail(viewModel: DetailViewPresentation)
@@ -14,10 +15,11 @@ protocol ItemsDetailViewProtocol : NSObject {
 protocol ItemsDetailInteractorProtocol {
     var newToDoItem: ToDo? { get set }
     func presentToDoItemsDetail()
-    func addToDoItem(title: String, detail: String, deadline: Date)
-    func editToDoItem(title: String, detail: String, deadline: Date, id: UUID)
+    func addToDoItem(title: String, detail: String, deadline: Date) -> ToDo?
+    func editToDoItem(title: String, detail: String, deadline: Date, id: UUID) -> ToDo?
     func getToDoItem(id: UUID) -> ToDo?
     func deleteToDoItem()
+    func fetchNotificationSettings(_ view: UIViewController, item: ToDo)
     
 }
 

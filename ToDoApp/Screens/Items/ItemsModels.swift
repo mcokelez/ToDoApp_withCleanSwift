@@ -18,6 +18,7 @@ struct ViewPresentation {
         let title: String
         let createdTime: Date
         let id: UUID
+        let deadline: String
     }
 }
 

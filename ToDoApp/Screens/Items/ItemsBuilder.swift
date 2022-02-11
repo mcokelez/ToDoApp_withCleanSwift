@@ -11,7 +11,8 @@ import UIKit
 class ItemsBuilder {
     static func build(_ viewController: ItemsViewController) -> Void{
         let viewController = viewController
-        let interactor = ItemsInteractor(dataWorker: CoreDataManager())
+        let interactor = ItemsInteractor(dataWorker: CoreDataManager(),
+                                         notificationManager: LocalNotificationManager())
         let presenter = ItemsPresenter()
         let router = ItemsRouter()
         

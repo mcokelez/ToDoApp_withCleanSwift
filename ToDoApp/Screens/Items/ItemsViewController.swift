@@ -19,7 +19,7 @@ class ItemsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ItemsCell", bundle: nil), forCellReuseIdentifier: "itemsCell")
-        let image = UIImage(named: "5685019.png")
+        let image = UIImage(named: "background")
         let imageView = UIImageView(image: image)
         imageView.contentMode = .bottom
         tableView.backgroundView = imageView
@@ -31,8 +31,6 @@ class ItemsViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
-        searchController.searchBar.scopeButtonTitles = ["All","Last Item"]
-        searchController.searchBar.delegate = self
         return searchController
     }()
     
@@ -50,6 +48,7 @@ class ItemsViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.searchController = searchController
         tableViewSetup()
+        interactor?.requestNotificationAuthorised()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +57,10 @@ class ItemsViewController: UIViewController {
     
     @IBAction func addBarButtonTapped(_ sender: UIBarButtonItem) {
         router?.navigate(to: .addNewToDoItem)
+    }
+    
+    @IBAction func filterBarButtonTapped(_ sender: UIBarButtonItem) {
+        interactor?.sortedToDoItems()
     }
     
     func tableViewSetup(){
@@ -74,22 +77,13 @@ class ItemsViewController: UIViewController {
       return searchController.isActive && (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
     
-    func filterSearchText(searchText: String, scopeButton: String){
+    func filterSearchText(searchText: String){
         filteredViewModel = viewModel?.items.filter({ (filteredItem: ViewPresentation.ViewModel) -> Bool in
             if isSearchBarEmpty {
-                if scopeButton == "Last Item" {
-                    let filteredArray = viewModel?.items.sorted(by: { $0.createdTime > $1.createdTime })
-                    print(filteredArray!)
-                    return true && (filteredArray != nil)
-                } else {
-                    return false
-                }
+                return false
+                
             } else {
-                if scopeButton == "All" {
-                    return true && filteredItem.title.lowercased().contains(searchText.lowercased())
-                } else {
-                    return false
-                }
+                return true && filteredItem.title.lowercased().contains(searchText.lowercased())
             }
         })
         self.tableView.reloadData()
@@ -100,7 +94,7 @@ extension ItemsViewController: ItemsViewProtocol {
     func presentToDoItems(viewModel: ViewPresentation) {
         self.viewModel = viewModel
         self.tableView.reloadData()
-       // print(viewModel.items)
+        print(viewModel.items)
     }
 }
 
@@ -166,6 +160,11 @@ extension ItemsViewController: UITableViewDataSource {
         }
         cell.titleLabel.text = currentItem.title
         cell.createdDateLabel.text = "Created Time: " + currentItem.createdTime.dateAsPrettyString
+        if currentItem.deadline != "01.02.2022" {
+            cell.notificationImage.image = UIImage.init(systemName: "bell")
+        } else {
+            cell.notificationImage.image = nil
+        }
         return cell
     }
 }
@@ -173,13 +172,7 @@ extension ItemsViewController: UITableViewDataSource {
 extension ItemsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar  = searchController.searchBar
-        let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterSearchText(searchText: searchBar.text!, scopeButton: scopeButton)
+        filterSearchText(searchText: searchBar.text!)
     }
 }
 
-extension ItemsViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterSearchText(searchText: searchBar.text!, scopeButton: searchBar.scopeButtonTitles![selectedScope])
-    }
-}

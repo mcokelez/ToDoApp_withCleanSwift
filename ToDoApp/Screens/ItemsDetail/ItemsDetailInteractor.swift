@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStoreProtocol {
    
@@ -14,8 +15,10 @@ class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStore
     var itemID: UUID?
     
     let dataWorker: CoreDataManager
-    init(dataWorker: CoreDataManager) {
+    let notificationManager: LocalNotificationManager
+    init(dataWorker: CoreDataManager, notificationManager: LocalNotificationManager) {
         self.dataWorker = dataWorker
+        self.notificationManager = notificationManager
     }
     
     func presentToDoItemsDetail() {
@@ -24,15 +27,15 @@ class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStore
         presenter?.presentToDoItemsDetail(output: DetailResponse.init(response: item))
     }
     
-    func addToDoItem(title: String, detail: String, deadline: Date) {
-        dataWorker.insert(entity: ToDo.self,
+    func addToDoItem(title: String, detail: String, deadline: Date) -> ToDo? {
+     return   dataWorker.insert(entity: ToDo.self,
                           title: title,
                           detail: detail,
                           deadline: deadline)
     }
     
-    func editToDoItem(title: String, detail: String, deadline: Date, id: UUID){
-        dataWorker.update(entity: ToDo.self, title: title, detail: detail, deadline: deadline, id: id)
+    func editToDoItem(title: String, detail: String, deadline: Date, id: UUID) -> ToDo? {
+      return  dataWorker.update(entity: ToDo.self, title: title, detail: detail, deadline: deadline, id: id)
     }
     
     func deleteToDoItem() {
@@ -42,5 +45,9 @@ class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStore
     
     func getToDoItem(id: UUID) -> ToDo? {
         dataWorker.fetchSelectedItem(entity: ToDo.self, id: id)
+    }
+    
+    func fetchNotificationSettings(_ view: UIViewController, item: ToDo){
+        notificationManager.fetchNotificationSettings(view, item: item)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ItemsViewProtocol : NSObject {
     func presentToDoItems(viewModel: ViewPresentation)
@@ -14,6 +15,8 @@ protocol ItemsViewProtocol : NSObject {
 protocol ItemsInteractorProtocol {
     func fetchToDoItems()
     func deleteToDoItem(id: UUID)
+    func sortedToDoItems()
+    func requestNotificationAuthorised()
 }
 
 protocol ItemsDataStoreProtocol {

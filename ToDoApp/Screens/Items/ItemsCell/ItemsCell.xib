@@ -26,20 +26,20 @@
                         <state key="normal" image="circle" catalog="system"/>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3r8-VH-QNf">
-                        <rect key="frame" x="70" y="16" width="270" height="48"/>
+                        <rect key="frame" x="70" y="16" width="235" height="48"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdA-1Z-LhR">
-                                <rect key="frame" x="0.0" y="0.0" width="270" height="25"/>
+                                <rect key="frame" x="0.0" y="0.0" width="235" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="ekt-1s-2Gi"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="jvp-GV-dhd"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="235" id="jvp-GV-dhd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COW-ti-Oxz">
-                                <rect key="frame" x="0.0" y="30" width="270" height="18"/>
+                                <rect key="frame" x="0.0" y="30" width="235" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="3dE-jB-9JJ"/>
                                 </constraints>
@@ -49,25 +49,36 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="270" id="25X-Qm-HIT"/>
+                            <constraint firstAttribute="width" constant="235" id="25X-Qm-HIT"/>
                         </constraints>
                     </stackView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z1k-S6-BtD">
+                        <rect key="frame" x="319" y="23" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="34" id="FY0-cD-wfy"/>
+                            <constraint firstAttribute="height" constant="34" id="m9w-Py-C8o"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="qDv-Zk-lz9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="348-tV-QQS"/>
                     <constraint firstItem="qDv-Zk-lz9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="BvR-7P-Qel"/>
                     <constraint firstItem="3r8-VH-QNf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Fjh-vx-UJv"/>
                     <constraint firstAttribute="bottom" secondItem="3r8-VH-QNf" secondAttribute="bottom" constant="16" id="LTo-au-LaX"/>
+                    <constraint firstAttribute="trailing" secondItem="z1k-S6-BtD" secondAttribute="trailing" constant="14" id="Lyn-16-ub8"/>
+                    <constraint firstItem="z1k-S6-BtD" firstAttribute="leading" secondItem="3r8-VH-QNf" secondAttribute="trailing" constant="14" id="Wkn-4Z-QDD"/>
                     <constraint firstItem="3r8-VH-QNf" firstAttribute="leading" secondItem="qDv-Zk-lz9" secondAttribute="trailing" constant="26" id="XFY-Tz-P68"/>
+                    <constraint firstItem="z1k-S6-BtD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="idH-WL-ics"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="checkBox" destination="qDv-Zk-lz9" id="hIN-Zp-TnF"/>
                 <outlet property="createdDateLabel" destination="COW-ti-Oxz" id="GIf-5k-Qqp"/>
+                <outlet property="notificationImage" destination="z1k-S6-BtD" id="PWi-V1-MNU"/>
                 <outlet property="titleLabel" destination="sdA-1Z-LhR" id="Q7d-kQ-zI8"/>
             </connections>
-            <point key="canvasLocation" x="19.565217391304348" y="73.995535714285708"/>
+            <point key="canvasLocation" x="19.565217391304348" y="72.991071428571431"/>
         </tableViewCell>
     </objects>
     <resources>

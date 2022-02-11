@@ -38,18 +38,12 @@ class ItemsDetailViewController: UIViewController {
         deadlinePicker.isHidden = true
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat =  "dd.MM.yyyy"
-        let date = dateFormatter.date(from: "19.05.1992")
+        let date = dateFormatter.date(from: "01.02.2022")
         deadlinePicker.date = date!
     }
     
     @IBAction func didDeadlineButtonTap(_ sender: UIButton) {
         deadlinePicker.isHidden = false
-        deadlinePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-    }
-    
-    @objc private func dateChanged() {
-        presentedViewController?.dismiss(animated: true, completion: nil)
-        print(deadlinePicker.date.dateAsPrettyString)
     }
     
     @IBAction func saveBarButton(_ sender: UIBarButtonItem) {
@@ -58,11 +52,17 @@ class ItemsDetailViewController: UIViewController {
                 didTitleEmpty()
                 return
             }
-            interactor?.addToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date)
+            let item = interactor?.addToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date)
+            if item?.deadline?.dateAsPrettyString != "01.02.2022"{
+                interactor?.fetchNotificationSettings(self, item: item!)
+            }
             router?.navigate(to: .presentItemsViewController)
             return
         }
-        interactor?.editToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date, id: itemID)
+        let item = interactor?.editToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date, id: itemID)
+        if item?.deadline?.dateAsPrettyString != "01.02.2022"{
+            interactor?.fetchNotificationSettings(self, item: item!)
+        }
         router?.navigate(to: .presentItemsViewController)
     }
     
@@ -78,10 +78,9 @@ extension ItemsDetailViewController: ItemsDetailViewProtocol {
     func presentToDoItemsDetail(viewModel: DetailViewPresentation) {
         self.titleText.text = viewModel.title
         self.detailText.text = viewModel.detail
-        if viewModel.deadline.dateAsPrettyString != "19.05.1992" {
+        if viewModel.deadline.dateAsPrettyString != "01.02.2022" {
             self.deadlinePicker.isHidden = false
             self.deadlinePicker.date = viewModel.deadline
-            self.deadlinePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         } else {
             self.deadlinePicker.isHidden = true
         }
