@@ -1,3 +1,6 @@
+
+## Project is under the developer branch, use it there.
+
 > # To Do List App 
 >
 >>  **Architecture** : Clean Swift
