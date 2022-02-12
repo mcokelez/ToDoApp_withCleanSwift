@@ -13,5 +13,11 @@ extension Date {
         dateFormat.dateFormat = "dd.MM.yyyy"
         return dateFormat.string(from: self)
     }
+    
+    var alertString: String {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "MMM d, h:mm a"
+        return dateFormat.string(from: self)
+    }
 }
 

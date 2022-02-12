@@ -29,7 +29,7 @@ class LocalNotificationManager: NotificationManager {
           DispatchQueue.main.async {
             if settings.authorizationStatus == .authorized  && item.deadline?.dateAsPrettyString !=  "01.02.2022"{
                 self.scheduleNotification(item: item)
-                let ac = UIAlertController(title: "Notification Scheduled", message: "At " + item.deadline!.dateAsPrettyString, preferredStyle: .alert)
+                let ac = UIAlertController(title: "Notification Scheduled", message: "At " + item.deadline!.alertString, preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in}))
                 view.present(ac, animated: true)
             } else {

@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5685019.png" translatesAutoresizingMaskIntoConstraints="NO" id="wme-iX-85k">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="wme-iX-85k">
                                 <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                             </imageView>
                         </subviews>
@@ -137,7 +137,7 @@
                                     <constraint firstAttribute="height" constant="150" id="ing-hG-J2G"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="dZ3-ms-mMG">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="dZ3-ms-mMG">
                                 <rect key="frame" x="17.5" y="396" width="340" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5U3-KE-RKy">
@@ -154,7 +154,7 @@
                                         </connections>
                                     </button>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="gHb-wU-bYM">
-                                        <rect key="frame" x="157" y="0.0" width="183" height="60"/>
+                                        <rect key="frame" x="155" y="0.0" width="185" height="60"/>
                                     </datePicker>
                                 </subviews>
                                 <constraints>
@@ -200,7 +200,6 @@
         <segue reference="apA-hs-ysa"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="5685019.png" width="3000" height="2000"/>
         <image name="background" width="3000" height="2000"/>
         <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
         <image name="plus.rectangle.on.rectangle" catalog="system" width="128" height="96"/>
