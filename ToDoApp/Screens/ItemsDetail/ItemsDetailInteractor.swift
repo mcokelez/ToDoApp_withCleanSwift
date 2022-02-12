@@ -21,6 +21,8 @@ class ItemsDetailInteractor: ItemsDetailInteractorProtocol, ItemsDetailDataStore
         self.notificationManager = notificationManager
     }
     
+    // MARK: - Items Detail Interactor Protocols
+    
     func presentToDoItemsDetail() {
         guard let itemID = itemID else { return }
         guard let item = getToDoItem(id: itemID) else { return }

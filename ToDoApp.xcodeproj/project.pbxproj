@@ -40,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C5CBA9127B843C4000C4CC8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5C60D03727A8084000F18381 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5C60D03E27A8348000F18381 /* CoreDataErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataErrorModel.swift; sourceTree = "<group>"; };
 		5C60D04427A8435200F18381 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 		5CB86D9027A6FE2F00106F8D = {
 			isa = PBXGroup;
 			children = (
+				5C5CBA9127B843C4000C4CC8 /* README.md */,
 				5CB86D9B27A6FE2F00106F8D /* ToDoApp */,
 				5CB86D9A27A6FE2F00106F8D /* Products */,
 			);

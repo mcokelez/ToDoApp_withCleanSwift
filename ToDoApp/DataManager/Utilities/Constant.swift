@@ -8,6 +8,8 @@
 import Foundation
 import CoreData
 
+//MARK: - Core Data context
+
 class CoreDataManaged : NSManagedObjectContext {
     static let context  = CoreDataManager.shared.persistentContainer.viewContext
 }

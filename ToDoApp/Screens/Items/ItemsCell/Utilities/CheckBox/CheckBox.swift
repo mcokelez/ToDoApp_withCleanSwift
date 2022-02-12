@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - If item did finished tapped the button, button view looks like this class
+
 class CheckBox: UIButton {
     // Images
     var checkedImage = [UIImage(named: "blue"),

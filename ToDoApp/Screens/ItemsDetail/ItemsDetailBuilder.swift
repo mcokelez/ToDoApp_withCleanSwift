@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+// MARK: - Items Detail View Setup
+
 class ItemsDetailBuilder {
     static func build(_ viewController: ItemsDetailViewController){
         let viewController = viewController

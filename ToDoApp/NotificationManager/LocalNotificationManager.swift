@@ -14,6 +14,8 @@ class LocalNotificationManager: NotificationManager {
     
     let notificationCenter = UNUserNotificationCenter.current()
     
+    // MARK: - Notification Manager Protocols
+    
     func requestAuthorization() {
         notificationCenter
           .requestAuthorization(options: [.alert, .sound, .badge]) { permissionGranted, _ in
@@ -72,12 +74,8 @@ class LocalNotificationManager: NotificationManager {
                                             trigger: trigger)
         notificationCenter.add(request) { (error) in
             if error != nil {
-                print("notificaiton error")
+                print("Notification error: \(error.debugDescription) ")
             }
         }
-       
     }
-    
-    
-   
 }

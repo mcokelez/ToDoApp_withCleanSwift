@@ -13,6 +13,8 @@ class ItemsRouter : ItemsRouterProtocol {
     weak var viewController: ItemsViewController?
     var dataStore: ItemsDataStoreProtocol?
     
+    // MARK: - Items Router Protocol
+    
     func navigate(to route: ItemsRoute) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(withIdentifier: "ItemsDetailViewController") as! ItemsDetailViewController
@@ -25,7 +27,5 @@ class ItemsRouter : ItemsRouterProtocol {
         }
         self.viewController?.navigationController?.present(destinationVC, animated: true, completion: nil)
     }
-    
-   
 }
 

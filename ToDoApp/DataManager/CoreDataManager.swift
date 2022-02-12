@@ -13,6 +13,8 @@ class CoreDataManager : DataManagerProtocol {
     
     static let shared = CoreDataManager()
   
+    // MARK: - Data Manager Protocols
+    
     func insert<Entity>(entity: Entity.Type, title: String, detail: String, deadline: Date) -> Entity? {
         let toDoEntity = ToDo(context: CoreDataManaged.context)
         toDoEntity.title = title

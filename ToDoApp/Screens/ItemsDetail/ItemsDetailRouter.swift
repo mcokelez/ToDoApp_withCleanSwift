@@ -13,6 +13,8 @@ class ItemsDetailRouter: ItemsDetailRouterProtocol {
     var viewController: ItemsDetailViewController?
     var dataStore: ItemsDetailDataStoreProtocol?
     
+    // MARK: - Items Detail Router Protocol
+    
     func navigate(to route: ItemsDetailRoute) {
         switch route {
         case .presentItemsViewController:

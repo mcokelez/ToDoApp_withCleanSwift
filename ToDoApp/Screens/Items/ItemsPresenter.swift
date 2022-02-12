@@ -10,6 +10,9 @@ import Foundation
 class ItemsPresenter : ItemsPresenterProtocol {
     weak var viewController: ItemsViewProtocol?
     var viewModel : [ViewPresentation.ViewModel] = []
+    
+    // MARK: - Items Presenter Protocols
+    
     func presentToDoItems(output: Response) {
         viewModel.removeAll()
         for item in output.response {
@@ -20,5 +23,4 @@ class ItemsPresenter : ItemsPresenterProtocol {
         }
         viewController?.presentToDoItems(viewModel: ViewPresentation(items: viewModel))
     }
-    
 }

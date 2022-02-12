@@ -9,6 +9,8 @@ import UIKit
 
 class ItemsViewController: UIViewController {
     
+    // MARK: - Variables
+    
     var interactor: ItemsInteractorProtocol?
     var router: ItemsRouterProtocol?
     var viewModel: ViewPresentation?
@@ -68,6 +70,8 @@ class ItemsViewController: UIViewController {
         self.view.addSubview(tableView)
     }
     
+    // MARK: - Variables for Search Bar
+    
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -90,6 +94,8 @@ class ItemsViewController: UIViewController {
     }
 }
 
+// MARK: - Items View Protocol
+
 extension ItemsViewController: ItemsViewProtocol {
     func presentToDoItems(viewModel: ViewPresentation) {
         self.viewModel = viewModel
@@ -97,6 +103,8 @@ extension ItemsViewController: ItemsViewProtocol {
         print(viewModel.items)
     }
 }
+
+// MARK: - Table View Delegate
 
 extension ItemsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -138,6 +146,8 @@ extension ItemsViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - Table View Data Source
+
 extension ItemsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
@@ -168,6 +178,8 @@ extension ItemsViewController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - Search Bar Result Updater
 
 extension ItemsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {

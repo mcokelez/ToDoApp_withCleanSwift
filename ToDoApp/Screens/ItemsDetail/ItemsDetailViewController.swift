@@ -34,6 +34,8 @@ class ItemsDetailViewController: UIViewController {
         interactor?.presentToDoItemsDetail()
     }
     
+    // MARK: - set date time check the notification date
+    
     func deadlineDefaultValue() {
         deadlinePicker.isHidden = true
         let dateFormatter = DateFormatter()
@@ -52,6 +54,7 @@ class ItemsDetailViewController: UIViewController {
                 didTitleEmpty()
                 return
             }
+            /** new item */
             let item = interactor?.addToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date)
             if item?.deadline?.dateAsPrettyString != "01.02.2022"{
                 interactor?.fetchNotificationSettings(self, item: item!)
@@ -59,12 +62,17 @@ class ItemsDetailViewController: UIViewController {
             router?.navigate(to: .presentItemsViewController)
             return
         }
+        /** edit item */
         let item = interactor?.editToDoItem(title: titleText.text!, detail: detailText.text, deadline: deadlinePicker.date, id: itemID)
+       
         if item?.deadline?.dateAsPrettyString != "01.02.2022"{
+            /** notification sets : if permission is denied  fetchNotificationSettings open the Setting, else notification set this item */
             interactor?.fetchNotificationSettings(self, item: item!)
         }
         router?.navigate(to: .presentItemsViewController)
     }
+    
+    // MARK: - Title require check function
     
     func didTitleEmpty() {
         let alert = UIAlertController(title: "Required", message: "Title can not be empty!", preferredStyle: UIAlertController.Style.alert)
@@ -73,6 +81,8 @@ class ItemsDetailViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
+
+// MARK: - Items Detail View Protocol
 
 extension ItemsDetailViewController: ItemsDetailViewProtocol {
     func presentToDoItemsDetail(viewModel: DetailViewPresentation) {
@@ -86,6 +96,8 @@ extension ItemsDetailViewController: ItemsDetailViewProtocol {
         }
     }
 }
+
+// MARK: - Text View Delegate
 
 extension ItemsDetailViewController : UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {

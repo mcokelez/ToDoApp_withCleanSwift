@@ -19,6 +19,7 @@ class ItemsInteractor : ItemsInteractorProtocol, ItemsDataStoreProtocol{
         self.dataWorker = dataWorker
         self.notificationManager = notificationManager
     }
+    // MARK: - Items Interactor Protocols
     
     func fetchToDoItems() {
         guard let response = dataWorker.fetchAllItems(entity: ToDo.self) else { return }
